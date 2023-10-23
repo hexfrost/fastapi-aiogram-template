@@ -8,7 +8,7 @@ load_dotenv()
 
 # Required
 BOT_TOKEN=os.getenv("BOT_TOKEN")
-WEBHOOK_URL = os.getenv("WEBHOOK_URL")
+WEBHOOK_DOMAIN = os.getenv("WEBHOOK_DOMAIN")
 CHATS_TO_CLEAN= [int(x) for x in os.getenv("CHATS_TO_CLEAN").split(" ")]
 
 # Optional
