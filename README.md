@@ -1,1 +1,5 @@
-# tg-delete-system-messages
+# Example Project
+
+FastAPI
+Aiogram 3
+SQLAlchemy
