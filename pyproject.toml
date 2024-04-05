@@ -10,6 +10,7 @@ packages = [{include = "backend"}]
 python = "3.10.6"
 fastapi = "0.103.1"
 python-dotenv = "1.0.0"
+hexfrost-toolbox = "^0.1.2"
 uvicorn = "0.23.2"
 aiogram = "3.0.0"
 
