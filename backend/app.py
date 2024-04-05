@@ -2,8 +2,6 @@ import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher, Router, types
-from aiogram.methods import DeleteMessage
-
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -13,18 +11,13 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI()
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+    CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"], )
 webhook_api_router = APIRouter()
 
 bot = Bot(token=settings.BOT_TOKEN, parse_mode="HTML")
 dp = Dispatcher()
 messages_handler = Router()
-TELEGRAM_WEBHOOK_URL = f"{settings.WEBHOOK_DOMAIN}/webhook"
+TELEGRAM_WEBHOOK_URL = f"{settings.BASE_DOMAIN}/webhook"
 
 
 def retry_after(seconds: int):
@@ -39,11 +32,13 @@ def retry_after(seconds: int):
                     logger.error(f"Error while processing message: {e}")
                     logger.info(f"Retrying after {seconds} seconds")
                     await asyncio.sleep(seconds)
+
         return wrapper
+
     return decorator
 
 
-@webhook_api_router.post("/webhook" )
+@webhook_api_router.post("/webhook")
 async def telegram_webhook(request: dict):
     update = types.Update(**request)
     await dp.feed_update(bot=bot, update=update)
@@ -56,7 +51,7 @@ async def root():
 
 @retry_after(settings.RETRY_TIMEOUT)
 async def register_webhook():
-    await bot.set_webhook(url=f"{settings.WEBHOOK_DOMAIN}/webhook")
+    await bot.set_webhook(url=f"{settings.BASE_DOMAIN}/webhook")
     webhook_info = await bot.get_webhook_info()
     logger.info(f"""Webhook info: {webhook_info}""")
 

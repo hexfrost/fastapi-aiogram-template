@@ -1,18 +1,11 @@
 import os
-import random
-from string import ascii_letters, digits
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# Required
-BOT_TOKEN=os.getenv("BOT_TOKEN")
-WEBHOOK_DOMAIN = os.getenv("WEBHOOK_DOMAIN")
-
-# Optional
-RANDON_WEBHOOK_PATH = "".join(random.choices(list(ascii_letters + digits), k=32))
-WEBHOOK_PATH = os.getenv("WEBHOOK_PATH", RANDON_WEBHOOK_PATH)
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+BASE_DOMAIN = os.getenv("BASE_DOMAIN")
 
 ENABLE_TGBOT = os.getenv("ENABLE_TGBOT", True)
 RETRY_TIMEOUT = int(os.getenv("RETRY_TIMEOUT", 60))
