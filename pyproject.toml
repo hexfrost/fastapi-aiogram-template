@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "tg-delete-system-messages"
+name = "example project"
 version = "0.1.0"
 description = ""
 authors = ["Ilia Kaziamov <kaziamov@outlook.com>"]
 readme = "README.md"
-#packages = [{include = "tg_cleaner"}]
+packages = [{include = "backend"}]
 
 [tool.poetry.dependencies]
 python = "3.10.6"
