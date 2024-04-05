@@ -1,3 +1,4 @@
+import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher, Router, types
@@ -19,7 +20,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 webhook_api_router = APIRouter()
-app.include_router(webhook_api_router)
 
 bot = Bot(token=settings.BOT_TOKEN, parse_mode="HTML")
 dp = Dispatcher()
@@ -27,7 +27,23 @@ messages_handler = Router()
 TELEGRAM_WEBHOOK_URL = f"{settings.WEBHOOK_DOMAIN}/webhook"
 
 
-@webhook_api_router.post("/webhook")
+def retry_after(seconds: int):
+    def decorator(func):
+        async def wrapper(*args, **kwargs):
+            result = False
+            while not result:
+                try:
+                    await func(*args, **kwargs)
+                    result = True
+                except Exception as e:
+                    logger.error(f"Error while processing message: {e}")
+                    logger.info(f"Retrying after {seconds} seconds")
+                    await asyncio.sleep(seconds)
+        return wrapper
+    return decorator
+
+
+@webhook_api_router.post("/webhook" )
 async def telegram_webhook(request: dict):
     update = types.Update(**request)
     await dp.feed_update(bot=bot, update=update)
@@ -38,6 +54,7 @@ async def root():
     return {"status": "ok"}
 
 
+@retry_after(settings.RETRY_TIMEOUT)
 async def register_webhook():
     await bot.set_webhook(url=f"{settings.WEBHOOK_DOMAIN}/webhook")
     webhook_info = await bot.get_webhook_info()
