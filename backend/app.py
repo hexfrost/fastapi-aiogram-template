@@ -52,8 +52,10 @@ async def delete_messages_handler(message: types.Message):
 @app.on_event("startup")
 async def on_startup():
     logger.info("Starting up actions")
-    await register_webhook()
-    dp.include_router(messages_handler)
+    if settings.ENABLE_TGBOT:
+        app.include_router(webhook_api_router)
+        dp.include_router(messages_handler)
+        await register_webhook()
 
 
 @app.on_event("shutdown")
