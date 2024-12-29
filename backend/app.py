@@ -14,7 +14,7 @@ app.add_middleware(
     CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"], )
 webhook_api_router = APIRouter()
 
-bot = Bot(token=settings.BOT_TOKEN, parse_mode="HTML")
+bot = Bot(token=settings.BOT_TOKEN)
 dp = Dispatcher()
 messages_handler = Router()
 TELEGRAM_WEBHOOK_URL = f"{settings.BASE_DOMAIN}/webhook"
