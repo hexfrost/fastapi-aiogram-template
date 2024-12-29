@@ -31,7 +31,6 @@ async def root():
     return {"status": "ok"}
 
 
-@retry_after(settings.RETRY_TIMEOUT)
 async def register_webhook():
     await bot.set_webhook(url=f"{settings.BASE_DOMAIN}/webhook")
     webhook_info = await bot.get_webhook_info()
