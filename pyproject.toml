@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "example project"
-version = "0.1.0"
+name = "FastAPI template"
+version = "0.1.1"
 description = ""
 authors = ["Ilia Kaziamov <kaziamov@outlook.com>"]
 readme = "README.md"
