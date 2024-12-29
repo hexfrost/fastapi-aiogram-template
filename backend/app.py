@@ -39,7 +39,7 @@ async def register_webhook():
 
 @messages_handler.message()
 async def delete_messages_handler(message: types.Message):
-    await message.reply("Hello from messages_handler")
+    await message.reply("Hello from FastAPI template")
 
 
 @app.on_event("startup")
