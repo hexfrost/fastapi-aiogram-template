@@ -1,9 +1,12 @@
+from __future__ import annotations
+
 import logging
 
-from aiogram import Dispatcher, Bot
+from aiogram import Bot
+from aiogram import Dispatcher
 
-from backend import settings
-from backend.services.telegram.botfather.handlers import messages_handler
+from src import settings
+from src.services.telegram.botfather.handlers import messages_handler
 
 
 logger = logging.getLogger(__name__)
