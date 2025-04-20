@@ -1,8 +1,9 @@
-# Bolerplate FastAPI + Aiogram3 + Poetry Template Project
+# FastAPI + Aiogram3 + UV 
+
 
 * FastAPI
 * Aiogram 3
-* Poetry
+* Uv
 * Docker
 
 ## Quickstart
