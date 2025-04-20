@@ -27,7 +27,6 @@ async def on_startup():
         await activate_botfather_bot()
 
 
-
 @app.on_event("shutdown")
 async def on_shutdown():
     await disable_botfather_bot()

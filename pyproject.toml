@@ -1,25 +1,32 @@
-[tool.poetry]
-name = "FastAPI template"
+[tool.uv]
+dev-dependencies = [
+    "flake8<8.0.0,>=7.1.1",
+]
+
+[tool.pdm.build]
+includes = [
+    "backend",
+]
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[project]
+authors = [
+    {name = "Ilia Kaziamov", email = "kaziamov@outlook.com"},
+]
+requires-python = "<4.0,>=3.12"
+dependencies = [
+    "fastapi<1.0.0,>=0.115.6",
+    "aiogram<4.0.0,>=3.16.0",
+    "hexfrost-toolbox<1.0.0,>=0.1.2",
+    "aiohttp<4.0.0,>=3.11.11",
+    "python-dotenv<2.0.0,>=1.0.1",
+    "uvicorn<1.0.0,>=0.34.0",
+]
+name = "FastAPI-template"
 version = "0.1.1"
 description = ""
-authors = ["Ilia Kaziamov <kaziamov@outlook.com>"]
 readme = "README.md"
-packages = [{include = "backend"}]
 
-[tool.poetry.dependencies]
-python = ">=3.12,<4.0"
-fastapi = "^0.115.6"
-aiogram = "^3.16.0"
-hexfrost-toolbox = "^0.1.2"
-aiohttp = "^3.11.11"
-python-dotenv = "^1.0.1"
-uvicorn = "^0.34.0"
-
-
-
-[tool.poetry.group.dev.dependencies]
-flake8 = "^7.1.1"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
